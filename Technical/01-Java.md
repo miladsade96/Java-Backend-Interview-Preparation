@@ -400,3 +400,360 @@
     System.out.println("Day: " + dayName);
     ```
     In this example, since `day` is 3, the output will be "Day: Wednesday".
+
+18. **When to use which types of conditional statements in java? (if-else, switch, ternary operator)**
+
+    - Use `if-else` statements when:
+        - You have complex conditions that require multiple logical checks.
+        - The conditions are not based on a single variable or expression.
+        - You need to handle ranges of values or more intricate decision-making processes.
+        - Example:
+          ```java
+          if (age < 13) {
+              System.out.println("Child");
+          } else if (age < 20) {
+              System.out.println("Teenager");
+          } else {
+              System.out.println("Adult");
+          }
+          ```
+    - Use `switch` statements when:
+        - You have a single variable or expression that can take on a limited set of discrete values.
+        - You want to improve code readability when dealing with multiple specific cases.
+        - The cases are mutually exclusive and do not require complex conditions.
+        - Example:
+          ```java
+          switch (day) {
+              case 1:
+                  System.out.println("Monday");
+                  break;
+              case 2:
+                  System.out.println("Tuesday");
+                  break;
+              // more cases...
+              default:
+                  System.out.println("Invalid day");
+          }
+          ```
+    - Use the `ternary operator` when:
+        - You need a concise way to assign a value based on a simple condition.
+        - The condition is straightforward and can be expressed in a single line.
+        - You want to improve code brevity without sacrificing readability.
+        - Example:
+          ```java
+          String result = (score >= 50) ? "Pass" : "Fail";
+          System.out.println(result);
+          ```
+
+      In summary, choose `if-else` for complex conditions, `switch` for discrete values of a single variable, and the
+      `ternary operator` for simple conditional assignments.
+
+19. **What is StringBuilder in java?**  
+    `StringBuilder` in Java is a mutable sequence of characters that is used to create and manipulate strings more
+    efficiently than the standard `String` class. Unlike `String`, which is immutable (meaning once created, its value
+    cannot be changed), `StringBuilder` allows for dynamic modification of the character sequence without creating new
+    objects.
+
+    Key features of `StringBuilder`:
+    - Mutable: You can modify the contents of a `StringBuilder` object without creating new instances.
+    - Efficient: It is more efficient for operations that involve frequent modifications, such as appending, inserting,
+      or deleting characters.
+    - Not synchronized: `StringBuilder` is not thread-safe, making it faster than `StringBuffer`, which is synchronized
+      and thread-safe.
+
+    Common methods of `StringBuilder`:
+    - `append(String str)`: Adds the specified string to the end of the current sequence.
+    - `insert(int offset, String str)`: Inserts the specified string at the specified position.
+    - `delete(int start, int end)`: Removes characters from the specified start index to the end index.
+    - `replace(int start, int end, String str)`: Replaces characters in the specified range with the given string.
+    - `toString()`: Converts the `StringBuilder` object to a `String`.
+
+    Example:
+    ```java
+    StringBuilder sb = new StringBuilder("Hello");
+    sb.append(" World");
+    sb.insert(5, ",");
+    System.out.println(sb.toString()); // Output: Hello, World
+    ```
+
+    In this example, we create a `StringBuilder` object, append a string to it, insert a comma, and then convert it to
+    a `String` for output.
+20. **What is StringBuffer in java?**  
+    `StringBuffer` in Java is a mutable sequence of characters that is used to create and manipulate strings in a
+    thread-safe manner. Similar to `StringBuilder`, `StringBuffer` allows for dynamic modification of the character
+    sequence without creating new objects. However, unlike `StringBuilder`, `StringBuffer` is synchronized, making it
+    safe for use in multi-threaded environments.
+
+    Key features of `StringBuffer`:
+    - Mutable: You can modify the contents of a `StringBuffer` object without creating new instances.
+    - Thread-safe: It is synchronized, meaning that multiple threads can safely access and modify a `StringBuffer`
+      object
+      without causing data corruption.
+    - Slightly slower: Due to its synchronization overhead, `StringBuffer` is generally slower than `StringBuilder`
+      for
+      single-threaded operations.
+
+    Common methods of `StringBuffer`:
+    - `append(String str)`: Adds the specified string to the end of the current sequence.
+    - `insert(int offset, String str)`: Inserts the specified string at the specified position.
+    - `delete(int start, int end)`: Removes characters from the specified start index to the end index.
+    - `replace(int start, int end, String str)`: Replaces characters in the specified range with the given string.
+    - `toString()`: Converts the `StringBuffer` object to a `String`.
+
+    Example:
+    ```java
+    StringBuffer sb = new StringBuffer("Hello");
+    sb.append(" World");
+    sb.insert(5, ",");
+    System.out.println(sb.toString()); // Output: Hello, World
+    ```
+
+    In this example, we create a `StringBuffer` object, append a string to it, insert a comma, and then convert it to
+    a `String` for output.
+21. **What are the differences between String, StringBuilder, and StringBuffer in java?**
+    - `String`:
+        - Immutable: Once created, the value of a `String` object cannot be changed. Any modification results in the
+          creation of a new `String` object.
+        - Thread-safe: Since `String` objects are immutable, they are inherently thread-safe.
+        - Slower for modifications: Frequent modifications (like concatenation) can lead to performance issues due to
+          the creation of multiple objects.
+    - `StringBuilder`:
+        - Mutable: Allows for dynamic modification of the character sequence without creating new objects.
+        - Not synchronized: It is not thread-safe, making it faster than `StringBuffer` for single-threaded
+          operations.
+        - Efficient for modifications: Ideal for scenarios where frequent modifications are needed, such as in loops.
+    - `StringBuffer`:
+        - Mutable: Similar to `StringBuilder`, it allows for dynamic modification of the character sequence.
+        - Synchronized: It is thread-safe, making it suitable for multi-threaded environments where multiple threads
+          may access and modify the same object.
+        - Slightly slower: Due to synchronization overhead, it is generally slower than `StringBuilder` for
+          single-threaded operations.
+
+    In summary, use `String` for fixed text that doesn't change, `StringBuilder` for efficient string manipulation in
+    single-threaded scenarios, and `StringBuffer` when thread safety is required in multi-threaded environments.
+22. **What is the concept of string pooling in java?**  
+    String pooling in Java is a memory optimization technique that involves storing a single copy of each distinct
+    string
+    literal in a special area of memory called the "string pool" or "string intern pool." This pool is maintained by
+    the
+    Java Virtual Machine (JVM) to improve memory efficiency and performance when dealing with strings.
+
+    When a string literal is created in Java, the JVM checks the string pool to see if an identical string already
+    exists.
+    If it does, the reference to the existing string is returned instead of creating a new string object. If the
+    string
+    does not exist in the pool, a new string object is created and added to the pool.
+
+    Example:
+    ```java
+    String str1 = "Hello";
+    String str2 = "Hello";
+
+    System.out.println(str1 == str2); // Output: true
+    ```
+    In this example, both `str1` and `str2` refer to the same string object in the string pool, so the comparison
+    using
+    `==` returns `true`.
+
+    The benefits of string pooling include:
+    - Memory Efficiency: Reduces memory consumption by avoiding duplicate string objects.
+    - Performance Improvement: Enhances performance by reusing existing string objects instead of creating new ones.
+
+    Note that strings created using the `new` keyword are not stored in the string pool by default. However, you can
+    explicitly add them to the pool using the `intern()` method.
+    ```java
+    String str3 = new String("Hello").intern();
+    System.out.println(str1 == str3); // Output: true
+    ```
+    In this example, `str3` is created using the `new` keyword but is interned, so it refers to the same string
+    object in the string pool as `str1`.
+23. **What is the difference between == and equals() method for comparing strings?**
+    - `==` Operator:
+        - The `==` operator compares the references (memory addresses) of two string objects to determine if they point
+          to
+          the same object in memory.
+        - It does not compare the actual content of the strings.
+        - Example:
+          ```java
+          String str1 = new String("Hello");
+          String str2 = new String("Hello");
+          System.out.println(str1 == str2); // Output: false
+          ```
+          In this example, `str1` and `str2` are two different objects in memory, so the comparison using `==` returns
+          `false`.
+    - `equals()` Method:
+        - The `equals()` method compares the actual content of two string objects to determine if they are equal in
+          terms
+          of their character sequences.
+        - It returns `true` if the contents are the same, regardless of whether they are different objects in memory.
+        - Example:
+          ```java
+          String str1 = new String("Hello");
+          String str2 = new String("Hello");
+          System.out.println(str1.equals(str2)); // Output: true
+          ```
+          In this example, although `str1` and `str2` are different objects, their contents are identical, so the
+          comparison using `equals()` returns `true`.
+
+    In summary, use the `==` operator to check if two string references point to the same object, and use the
+    `equals()`
+    method to compare the actual content of the strings for equality.
+24. **What are the important methods of String class?**  
+    The `String` class in Java provides a variety of important methods for manipulating and working with strings. Some
+    of the most commonly used methods include:
+
+    1. `length()`: Returns the length of the string (number of characters).
+       ```java
+       String str = "Hello";
+       int len = str.length(); // len = 5
+       ```
+    2. `charAt(int index)`: Returns the character at the specified index.
+       ```java
+       char ch = str.charAt(1); // ch = 'e'
+       ```
+    3. `substring(int beginIndex, int endIndex)`: Returns a new string that is a substring of the original string.
+       ```java
+       String subStr = str.substring(1, 4); // subStr = "ell"
+       ```
+    4. `toLowerCase()`: Converts all characters in the string to lowercase.
+       ```java
+       String lowerStr = str.toLowerCase(); // lowerStr = "hello"
+       ```
+    5. `toUpperCase()`: Converts all characters in the string to uppercase.
+       ```java
+       String upperStr = str.toUpperCase(); // upperStr = "HELLO"
+       ```
+    6. `trim()`: Removes leading and trailing whitespace from the string.
+       ```java
+       String trimmedStr = "  Hello  ".trim(); // trimmedStr = "Hello"
+       ```
+    7. `replace(char oldChar, char newChar)`: Replaces all occurrences of a specified character with a new character.
+       ```java
+       String replacedStr = str.replace('l', 'x'); // replacedStr = "Hexxo"
+       ```
+    8. `indexOf(String str)`: Returns the index of the first occurrence of the specified substring.
+       ```java
+       int index = str.indexOf("ll"); // index = 2
+       ```
+    9. `equals(Object anObject)`: Compares the content of two strings for equality.
+       ```java
+       boolean isEqual = str.equals("Hello"); // isEqual = true
+       ```
+    10. `split(String regex)`: Splits the string into an array of substrings based on the specified delimiter.
+        ```java
+        String[] parts = "a,b,c".split(","); // parts = ["a", "b", "c"]
+        ```
+25. **What is an Array? Why we need arrays in real applications?**  
+    An array in Java is a data structure that allows you to store multiple values of the same type in a single,
+    contiguous
+    block of memory. Each value in the array is called an element, and each element can be accessed using its index,
+    which
+    represents its position in the array (starting from 0).
+
+    Arrays are useful in real applications for several reasons:
+    - Efficient Data Storage: Arrays provide a way to store large amounts of data in a structured manner, allowing for
+      efficient access and manipulation of the data.
+    - Fixed Size: Once an array is created, its size is fixed, which can help manage memory usage and prevent
+      unexpected
+      growth of data structures.
+    - Easy Access: Elements in an array can be accessed directly using their index, making it easy to retrieve or modify
+      specific values.
+    - Iteration: Arrays can be easily traversed using loops, allowing for efficient processing of all elements in the
+      array.
+    - Grouping Related Data: Arrays allow you to group related data together, making it easier to manage and work with
+      collections of similar items.
+
+    Example:
+    ```java
+    int[] numbers = new int[5]; // Declare an array of integers with a size of 5
+    numbers[0] = 10; // Assign values to the array elements
+    numbers[1] = 20;
+    numbers[2] = 30;
+    numbers[3] = 40;
+    numbers[4] = 50;
+
+    for (int i = 0; i < numbers.length; i++) {
+        System.out.println(numbers[i]); // Output each element in the array
+    }
+    ```
+
+    In this example, we create an array of integers, assign values to its elements, and then iterate through the array
+    to
+    print each value.
+26. **How to declare and initialize an array in java?**  
+    In Java, you can declare and initialize an array in several ways. Here are the common methods:
+
+    1. Declaration and Initialization in Separate Steps:
+       ```java
+       int[] numbers; // Declare an array of integers
+       numbers = new int[5]; // Initialize the array with a size of 5
+       ```
+    2. Declaration and Initialization in a Single Step:
+       ```java
+       int[] numbers = new int[5]; // Declare and initialize an array of integers with a size of 5
+       ```
+    3. Declaration and Initialization with Values:
+       ```java
+       int[] numbers = {10, 20, 30, 40, 50}; // Declare and initialize an array with specific values
+       ```
+    4. Using the `new` Keyword with Values:
+       ```java
+       int[] numbers = new int[]{10, 20, 30, 40, 50}; // Declare and initialize an array using the new keyword
+       ```
+
+    Example:
+    ```java
+    // Method 1: Separate declaration and initialization
+    String[] fruits;
+    fruits = new String[3];
+    fruits[0] = "Apple";
+    fruits[1] = "Banana";
+    fruits[2] = "Cherry";
+
+    // Method 2: Single step declaration and initialization
+    String[] vegetables = new String[3];
+    vegetables[0] = "Carrot";
+    vegetables[1] = "Broccoli";
+    vegetables[2] = "Spinach";
+
+    // Method 3: Declaration and initialization with values
+    String[] colors = {"Red", "Green", "Blue"};
+
+    // Method 4: Using new keyword with values
+    String[] animals = new String[]{"Dog", "Cat", "Bird"};
+    ```
+
+    In these examples, we demonstrate different ways to declare and initialize arrays of various types in Java.
+27. **How to iterate over an array in java?**  
+    In Java, you can iterate over an array using several methods. Here are some common ways to do so:
+
+    1. Using a `for` loop:
+       ```java
+       int[] numbers = {10, 20, 30, 40, 50};
+       for (int i = 0; i < numbers.length; i++) {
+           System.out.println(numbers[i]); // Output each element in the array
+       }
+       ```
+    2. Using an enhanced `for` loop (for-each loop):
+       ```java
+       int[] numbers = {10, 20, 30, 40, 50};
+       for (int number : numbers) {
+           System.out.println(number); // Output each element in the array
+       }
+       ```
+    3. Using `Arrays.stream()` (Java 8 and later):
+       ```java
+       import java.util.Arrays;
+
+       int[] numbers = {10, 20, 30, 40, 50};
+       Arrays.stream(numbers).forEach(System.out::println); // Output each element in the array
+       ```
+    4. Using `while` loop:
+       ```java
+       int[] numbers = {10, 20, 30, 40, 50};
+       int i = 0;
+       while (i < numbers.length) {
+           System.out.println(numbers[i]); // Output each element in the array
+           i++;
+       }
+       ```
