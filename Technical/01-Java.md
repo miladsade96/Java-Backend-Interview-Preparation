@@ -3066,3 +3066,794 @@
     storage and manipulation in Java.
 
 ---
+
+82. **What are the types of collections on java(just name them and a short description)?**  
+    The main types of collections in Java are:
+
+    1. **List**:
+        - An ordered collection that allows duplicate elements. Elements can be accessed by their index.
+        - Example implementations: `ArrayList`, `LinkedList`, `Vector`.
+
+    2. **Set**:
+        - A collection that does not allow duplicate elements. It models the mathematical set abstraction.
+        - Example implementations: `HashSet`, `LinkedHashSet`, `TreeSet`.
+
+    3. **Map**:
+        - A collection that maps keys to values, allowing for key-value pairs. Keys must be unique, but values can be
+          duplicated.
+        - Example implementations: `HashMap`, `LinkedHashMap`, `TreeMap`.
+
+    4. **Queue**:
+        - A collection designed for holding elements prior to processing, typically following a FIFO (First In, First
+          Out)
+          order.
+        - Example implementations: `LinkedList`, `PriorityQueue`, `ArrayDeque`.
+
+    5. **Deque**:
+        - A double-ended queue that allows insertion and removal of elements from both ends.
+        - Example implementations: `ArrayDeque`, `LinkedList`.
+
+    These collections provide various functionalities and performance characteristics, allowing developers to choose
+    the
+    most suitable one based on their specific use cases.
+
+---
+
+83. **What are Iterable and Collection interfaces?**  
+    In Java, the `Iterable` and `Collection` interfaces are part of the Java Collections Framework and serve different
+    purposes:
+
+    1. **Iterable Interface**:
+        - The `Iterable` interface is the root interface for all collection classes in Java. It defines a single method,
+          `iterator()`, which returns an `Iterator` object that can be used to traverse the elements of the collection.
+        - Any class that implements the `Iterable` interface can be used in enhanced for-loops (for-each loops) for
+          iteration.
+        - Example:
+          ```java
+          public interface Iterable<T> {
+              Iterator<T> iterator();
+          }
+          ```
+
+    2. **Collection Interface**:
+        - The `Collection` interface extends the `Iterable` interface and represents a group of objects known as
+          elements.
+        - It provides methods for basic operations such as adding, removing, checking for containment, and size of the
+          collection.
+        - The `Collection` interface is further extended by more specific collection interfaces like `List`, `Set`, and
+          `Queue`.
+        - Example:
+          ```java
+          public interface Collection<E> extends Iterable<E> {
+              boolean add(E e);
+              boolean remove(Object o);
+              boolean contains(Object o);
+              int size();
+              // Other methods...
+          }
+          ```
+
+    In summary, the `Iterable` interface provides a way to iterate over a collection, while the `Collection` interface
+    defines the basic operations that can be performed on a group of objects.
+
+---
+
+84. **What are List, Queue and Set collections in java?**  
+    In Java, `List`, `Queue`, and `Set` are three different types of collections that serve distinct purposes:
+
+    1. **List**:
+        - A `List` is an ordered collection that allows duplicate elements. It maintains the insertion order of
+          elements,
+          meaning
+          that elements can be accessed by their index.
+        - Common implementations of the `List` interface include `ArrayList`, `LinkedList`, and `Vector`.
+        - Example:
+          ```java
+          List<String> names = new ArrayList<>();
+          names.add("Alice");
+          names.add("Bob");
+          names.add("Alice"); // Duplicate allowed
+          ```
+
+    2. **Queue**:
+        - A `Queue` is a collection designed for holding elements prior to processing. It typically follows a FIFO (
+          First
+          In,
+          First Out) order, meaning that elements are processed in the order they were added.
+        - Common implementations of the `Queue` interface include `LinkedList`, `PriorityQueue`, and `ArrayDeque`.
+        - Example:
+          ```java
+          Queue<Integer> queue = new LinkedList<>();
+          queue.add(1);
+          queue.add(2);
+          queue.add(3);
+          Integer first = queue.poll(); // Retrieves and removes the head of the queue (1)
+          ```
+
+    3. **Set**:
+        - A `Set` is a collection that does not allow duplicate elements. It models the mathematical set abstraction,
+          where
+          each
+          element is unique.
+        - Common implementations of the `Set` interface include `HashSet`, `LinkedHashSet`, and `TreeSet`.
+        - Example:
+          ```java
+          Set<String> uniqueNames = new HashSet<>();
+          uniqueNames.add("Alice");
+          uniqueNames.add("Bob");
+          uniqueNames.add("Alice"); // Duplicate not added
+          ```
+
+    In summary, `List` allows duplicates and maintains order, `Queue` is used for processing elements in a specific
+    order,
+    and
+    `Set` ensures uniqueness of elements without maintaining any specific order.
+
+---
+
+85. **What is ArrayList in java and how is it different from array?**  
+    An `ArrayList` in Java is a resizable array implementation of the `List` interface, part of the Java Collections
+    Framework. It provides dynamic array capabilities, allowing elements to be added or removed, and automatically
+    adjusts
+    its size as needed.
+
+    Key differences between `ArrayList` and arrays in Java:
+
+    1. **Size**:
+        - Array: The size of an array is fixed at the time of creation and cannot be changed.
+        - ArrayList: The size of an `ArrayList` can grow or shrink dynamically as elements are added or removed.
+
+    2. **Type**:
+        - Array: Arrays can hold primitive data types (e.g., int, char) as well as objects.
+        - ArrayList: `ArrayList` can only hold objects. For primitive types, you need to use their wrapper classes (
+          e.g.,
+          Integer for int).
+
+    3. **Performance**:
+        - Array: Accessing elements in an array is faster due to direct indexing.
+        - ArrayList: Accessing elements in an `ArrayList` may be slightly slower due to additional overhead for dynamic
+          resizing and method calls.
+
+    4. **Methods**:
+        - Array: Arrays have limited built-in methods for manipulation (e.g., length property).
+        - ArrayList: `ArrayList` provides various methods for adding, removing, searching, and sorting elements (e.g.,
+          add(),
+          remove(), contains(), sort()).
+
+    5. **Type Safety**:
+        - Array: Arrays are type-safe, meaning they can only hold elements of a specific type defined at creation.
+        - ArrayList: With generics, `ArrayList` can be made type-safe by specifying the type of elements it can hold.
+
+    Example of using an `ArrayList`:
+    ```java
+    import java.util.ArrayList;
+
+    public class ArrayListExample {
+        public static void main(String[] args) {
+            ArrayList<String> names = new ArrayList<>();
+            names.add("Alice");
+            names.add("Bob");
+            names.add("Charlie");
+
+            System.out.println("Names: " + names);
+        }
+    }
+    ```
+    In this example, an `ArrayList` is created to store a list of names, demonstrating its dynamic sizing and ease of
+    use
+    compared to a traditional array.
+
+---
+
+86. **What is HashSet in java? What are the differences between HashSet and ArrayList?**  
+    A `HashSet` in Java is a collection that implements the `Set` interface and is backed by a hash table (actually a
+    `HashMap` instance). It is used to store unique elements, meaning that it does not allow duplicate values. The
+    elements
+    in a `HashSet` are unordered, and the order of elements may change over time as elements are added or removed.
+
+    Key differences between `HashSet` and `ArrayList`:
+
+    1. **Duplicates**:
+        - HashSet: Does not allow duplicate elements. If you try to add a duplicate element, it will be ignored.
+        - ArrayList: Allows duplicate elements. You can add the same element multiple times.
+
+    2. **Order**:
+        - HashSet: Does not maintain any specific order of elements. The order may change as elements are added or
+          removed.
+        - ArrayList: Maintains the insertion order of elements. Elements can be accessed by their index.
+
+    3. **Performance**:
+        - HashSet: Provides constant time performance for basic operations like add, remove, and contains, assuming the
+          hash function disperses elements properly.
+        - ArrayList: Provides linear time performance for operations like add (when resizing is needed) and remove,
+          while
+          accessing elements by index is constant time.
+
+    4. **Use Case**:
+        - HashSet: Ideal for scenarios where you need to store unique elements and do not care about the order of
+          elements.
+        - ArrayList: Suitable for scenarios where you need to maintain the order of elements and allow duplicates.
+
+    Example of using a `HashSet`:
+    ```java
+    import java.util.HashSet;
+
+    public class HashSetExample {
+        public static void main(String[] args) {
+            HashSet<String> uniqueNames = new HashSet<>();
+            uniqueNames.add("Alice");
+            uniqueNames.add("Bob");
+            uniqueNames.add("Alice"); // Duplicate ignored
+
+            System.out.println("Unique Names: " + uniqueNames);
+        }
+    }
+    ```
+    In this example, a `HashSet` is created to store unique names, demonstrating its ability to ignore duplicate
+    entries.
+
+---
+
+87. **What is Map in java? Which classes implements Map interface?**  
+    In Java, a `Map` is a collection that represents a mapping between keys and values. It allows you to store data in
+    key-value pairs, where each key is unique and is used to retrieve the corresponding value. The `Map` interface is
+    part
+    of the Java Collections Framework and provides methods for adding, removing, and accessing elements based on their
+    keys.
+
+    Key characteristics of a `Map`:
+    - Keys must be unique; duplicate keys are not allowed.
+    - Values can be duplicated; multiple keys can map to the same value.
+    - The order of elements in a `Map` is not guaranteed unless using specific implementations that maintain order.
+
+    Common classes that implement the `Map` interface include:
+    1. **HashMap**: A widely used implementation that provides constant time performance for basic operations like add,
+       remove,
+       and contains. It does not maintain any specific order of elements.
+    2. **LinkedHashMap**: Extends `HashMap` and maintains the insertion order of elements. It provides predictable
+       iteration
+       order.
+    3. **TreeMap**: Implements the `SortedMap` interface and stores elements in a sorted order based on the natural
+       ordering
+       of keys or a specified comparator. It provides log(n) time performance for basic operations.
+    4. **Hashtable**: An older implementation that is synchronized and thread-safe. It does not allow null keys or
+       values
+       and is generally less preferred compared to `HashMap`.
+
+    Example of using a `HashMap`:
+    ```java
+    import java.util.HashMap;
+
+    public class MapExample {
+        public static void main(String[] args) {
+            HashMap<String, Integer> ageMap = new HashMap<>();
+            ageMap.put("Alice", 30);
+            ageMap.put("Bob", 25);
+            ageMap.put("Charlie", 35);
+
+            System.out.println("Age of Bob: " + ageMap.get("Bob"));
+        }
+    }
+    ```
+    In this example, a `HashMap` is created to store names as keys and their corresponding ages as values. The age of
+    "Bob" is retrieved using the key.
+
+---
+
+88. **What is HashMap in java? How to implement it and when to use it?**  
+    A `HashMap` in Java is a part of the Java Collections Framework and implements the `Map` interface. It is used to
+    store key-value pairs, where each key is unique, and each key maps to a specific value. `HashMap` uses a hash table
+    to
+    store the data, which allows for efficient retrieval, insertion, and deletion of elements based on their keys.
+
+    Key characteristics of `HashMap`:
+    - Allows one null key and multiple null values.
+    - Does not maintain any specific order of elements; the order may change as elements are added or removed.
+    - Provides constant time performance (O(1)) for basic operations like get() and put(), assuming the hash function
+      disperses elements properly.
+
+    How to implement a `HashMap`:
+    1. Import the `java.util.HashMap` class.
+    2. Create an instance of `HashMap`.
+    3. Use the `put()` method to add key-value pairs.
+    4. Use the `get()` method to retrieve values based on their keys.
+
+    Example of implementing a `HashMap`:
+    ```java
+    import java.util.HashMap;
+
+    public class HashMapExample {
+        public static void main(String[] args) {
+            // Creating a HashMap
+            HashMap<String, Integer> ageMap = new HashMap<>();
+
+            // Adding key-value pairs
+            ageMap.put("Alice", 30);
+            ageMap.put("Bob", 25);
+            ageMap.put("Charlie", 35);
+
+            // Retrieving a value based on its key
+            System.out.println("Age of Bob: " + ageMap.get("Bob"));
+
+            // Iterating through the HashMap
+            for (String name : ageMap.keySet()) {
+                System.out.println(name + ": " + ageMap.get(name));
+            }
+        }
+    }
+    ```
+
+    When to use `HashMap`:
+    - Use `HashMap` when you need to store data in key-value pairs and require fast access to values based on their
+      keys.
+    - It is suitable for scenarios where you do not need to maintain the order of elements.
+    - Ideal for applications that require frequent insertions and deletions of elements, as it provides efficient
+      performance for these operations.
+
+---
+
+89. **What are the differences between HashMap and HashSet in java?**  
+    The main differences between `HashMap` and `HashSet` in Java are as follows:
+
+    1. **Data Structure**:
+        - HashMap: Implements the `Map` interface and stores data in key-value pairs. Each key is unique, and each key
+          maps
+          to a specific value.
+        - HashSet: Implements the `Set` interface and stores only unique elements (values). It does not store key-value
+          pairs.
+
+    2. **Duplicates**:
+        - HashMap: Allows duplicate values but does not allow duplicate keys. Each key must be unique.
+        - HashSet: Does not allow duplicate elements. Each element in a `HashSet` must be unique.
+
+    3. **Null Values**:
+        - HashMap: Allows one null key and multiple null values.
+        - HashSet: Allows one null element.
+
+    4. **Order of Elements**:
+        - HashMap: Does not maintain any specific order of elements; the order may change as elements are added or
+          removed.
+        - HashSet: Also does not maintain any specific order of elements; the order may change as elements are added or
+          removed.
+
+    5. **Use Case**:
+        - HashMap: Used when you need to store data in key-value pairs and require fast access to values based on their
+          keys.
+        - HashSet: Used when you need to store a collection of unique elements without any associated values.
+
+    Example of using `HashMap`:
+    ```java
+    HashMap<String, Integer> ageMap = new HashMap<>();
+    ageMap.put("Alice", 30);
+    ageMap.put("Bob", 25);
+    ```
+
+    Example of using `HashSet`:
+    ```java
+    HashSet<String> uniqueNames = new HashSet<>();
+    uniqueNames.add("Alice");
+    uniqueNames.add("Bob");
+    ```
+
+    In summary, use `HashMap` for key-value pair storage and `HashSet` for storing unique elements.
+
+---
+
+90. **What is LinkedList in java? What are Singly and Doubly linked lists?**  
+    A `LinkedList` in Java is a data structure that implements the `List` and `Deque` interfaces, allowing for the
+    storage
+    of elements in a sequential manner. It consists of nodes, where each node contains data and a reference (or link)
+    to
+    the next node in the sequence. This structure allows for efficient insertions and deletions of elements, as it does
+    not
+    require shifting elements like an array.
+
+    There are two main types of linked lists:
+
+    1. **Singly Linked List**:
+        - In a singly linked list, each node contains a reference to the next node in the sequence.
+        - The last node points to `null`, indicating the end of the list.
+        - Traversal is only possible in one direction (from head to tail).
+        - Example structure:
+          ```
+          Head -> Node1 -> Node2 -> Node3 -> null
+          ```
+
+    2. **Doubly Linked List**:
+        - In a doubly linked list, each node contains two references: one to the next node and another to the previous
+          node.
+        - This allows for traversal in both directions (from head to tail and from tail to head).
+        - The first node's previous reference points to `null`, and the last node's next reference points to `null`.
+        - Example structure:
+          ```
+          null <- Node1 <-> Node2 <-> Node3 -> null
+          ```
+
+    In Java, the `LinkedList` class provided by the Java Collections Framework is implemented as a doubly linked list,
+    allowing for efficient operations at both ends of the list as well as in the middle.
+
+    Example of using a `LinkedList`:
+    ```java
+    import java.util.LinkedList;
+
+    public class LinkedListExample {
+        public static void main(String[] args) {
+            LinkedList<String> names = new LinkedList<>();
+            names.add("Alice");
+            names.add("Bob");
+            names.add("Charlie");
+
+            System.out.println("Names: " + names);
+        }
+    }
+    ```
+    In this example, a `LinkedList` is created to store a list of names, demonstrating its dynamic sizing and ease of
+    use.
+
+---
+
+91. **How to implement LinkedList in java? What are the differences between LinkedList and ArrayList?**  
+    To implement a `LinkedList` in Java, you can use the `LinkedList` class provided by the Java Collections Framework.
+    Here’s a simple example of how to create and use a `LinkedList`:
+
+    ```java
+    import java.util.LinkedList;
+
+    public class LinkedListExample {
+        public static void main(String[] args) {
+            // Creating a LinkedList
+            LinkedList<String> names = new LinkedList<>();
+
+            // Adding elements to the LinkedList
+            names.add("Alice");
+            names.add("Bob");
+            names.add("Charlie");
+
+            // Displaying the LinkedList
+            System.out.println("Names: " + names);
+
+            // Removing an element
+            names.remove("Bob");
+            System.out.println("After removal: " + names);
+
+            // Accessing an element
+            String firstElement = names.get(0);
+            System.out.println("First element: " + firstElement);
+        }
+    }
+    ```
+
+    Key differences between `LinkedList` and `ArrayList`:
+
+    1. **Data Structure**:
+        - LinkedList: Implements a doubly linked list structure where each element (node) contains references to the
+          next
+          and previous nodes.
+        - ArrayList: Implements a dynamic array structure that stores elements in contiguous memory locations.
+
+    2. **Performance**:
+        - LinkedList: Provides efficient insertions and deletions (O(1) time complexity) as it only requires updating
+          node
+          references. However, accessing elements by index is slower (O(n) time complexity) due to traversal.
+        - ArrayList: Provides fast access to elements by index (O(1) time complexity) but has slower insertions and
+          deletions
+          (O(n) time complexity) as it may require shifting elements.
+
+    3. **Memory Usage**:
+        - LinkedList: Uses more memory per element due to storing additional references for each node (next and
+          previous).
+        - ArrayList: Uses less memory per element as it only stores the actual data in contiguous memory locations.
+
+    4. **Use Cases**:
+        - LinkedList: Suitable for scenarios where frequent insertions and deletions are required, such as implementing
+          queues or stacks.
+        - ArrayList: Suitable for scenarios where fast access to elements is needed, such as when performing random
+          access
+          operations.
+
+    In summary, use `LinkedList` for dynamic data structures with frequent modifications and `ArrayList` for scenarios.
+
+---
+
+92. **What are the differences between Collection and Collections in java?**  
+    In Java, `Collection` and `Collections` are two distinct concepts within the Java Collections Framework, and they
+    serve different purposes:
+
+    1. **Collection**:
+        - `Collection` is an interface in the Java Collections Framework that represents a group of objects, known as
+          elements.
+        - It is the root interface for most of the collection classes in Java, such as `List`, `Set`, and `Queue`.
+        - The `Collection` interface defines basic operations for adding, removing, and checking for elements in a
+          collection.
+        - Example:
+          ```java
+          import java.util.Collection;
+          import java.util.ArrayList;
+
+          public class CollectionExample {
+              public static void main(String[] args) {
+                  Collection<String> names = new ArrayList<>();
+                  names.add("Alice");
+                  names.add("Bob");
+                  System.out.println("Names: " + names);
+              }
+          }
+          ```
+
+    2. **Collections**:
+        - `Collections` is a utility class in the Java Collections Framework that provides static methods for operating
+          on
+          or returning collections.
+        - It includes methods for sorting, searching, reversing, and shuffling collections, among other operations.
+        - The `Collections` class cannot be instantiated; it is used to perform operations on existing collection
+          instances.
+        - Example:
+          ```java
+          import java.util.Collections;
+          import java.util.ArrayList;
+
+          public class CollectionsExample {
+              public static void main(String[] args) {
+                  ArrayList<String> names = new ArrayList<>();
+                  names.add("Charlie");
+                  names.add("Alice");
+                  names.add("Bob");
+
+                  Collections.sort(names);
+                  System.out.println("Sorted Names: " + names);
+              }
+          }
+          ```
+    In summary, `Collection` is an interface that defines the structure and behavior of a collection of objects, while
+    `Collections` is a utility class that provides static methods for manipulating and operating on collections.
+
+---
+
+93. **What is TreeSet in java? What are the differences between HashSet and TreeSet?**  
+    A `TreeSet` in Java is a part of the Java Collections Framework and implements the `Set` interface. It is a
+    collection
+    that stores elements in a sorted order, based on their natural ordering or a specified comparator. `TreeSet` is
+    backed
+    by a Red-Black tree, which ensures that the elements are always sorted and provides efficient performance for
+    operations
+    like add, remove, and contains.
+
+    Key differences between `HashSet` and `TreeSet`:
+
+    1. **Ordering**:
+        - HashSet: Does not maintain any specific order of elements; the order may change as elements are added or
+          removed.
+        - TreeSet: Maintains elements in a sorted order based on their natural ordering or a specified comparator.
+
+    2. **Performance**:
+        - HashSet: Provides constant time performance (O(1)) for basic operations like add, remove, and contains,
+          assuming
+          the hash function disperses elements properly.
+        - TreeSet: Provides log(n) time performance for basic operations like add, remove, and contains due to the
+          underlying
+          Red-Black tree structure.
+
+    3. **Null Elements**:
+        - HashSet: Allows one null element.
+        - TreeSet: Does not allow null elements. Attempting to add a null element will result in a
+          `NullPointerException`.
+
+    4. **Use Case**:
+        - HashSet: Used when you need to store unique elements without any specific order and require fast access to
+          elements.
+        - TreeSet: Used when you need to store unique elements in a sorted order and require efficient range-based
+          operations.
+
+    Example of using a `TreeSet`:
+    ```java
+    import java.util.TreeSet;
+
+    public class TreeSetExample {
+        public static void main(String[] args) {
+            TreeSet<String> sortedNames = new TreeSet<>();
+            sortedNames.add("Charlie");
+            sortedNames.add("Alice");
+            sortedNames.add("Bob");
+
+            System.out.println("Sorted Names: " + sortedNames);
+        }
+    }
+    ```
+    In this example, a `TreeSet` is created to store names in a sorted order, demonstrating its ability to maintain
+    order
+    while ensuring uniqueness of elements.
+
+---
+
+94. **What are the differences between HashMap and Hashtable in java?**  
+    The main differences between `HashMap` and `Hashtable` in Java are as follows:
+
+    1. **Synchronization**:
+        - HashMap: Not synchronized, meaning it is not thread-safe. Multiple threads can access and modify a `HashMap`
+          concurrently, which may lead to inconsistent data if not handled properly.
+        - Hashtable: Synchronized, meaning it is thread-safe. It uses synchronized methods to ensure that only one
+          thread
+          can
+          access or modify the `Hashtable` at a time.
+
+    2. **Null Keys and Values**:
+        - HashMap: Allows one null key and multiple null values.
+        - Hashtable: Does not allow null keys or null values. Attempting to add a null key or value will result in a
+          `NullPointerException`.
+
+    3. **Performance**:
+        - HashMap: Generally faster than `Hashtable` due to the lack of synchronization overhead.
+        - Hashtable: Slower than `HashMap` because of the synchronization mechanisms used to ensure thread safety.
+
+    4. **Legacy Status**:
+        - HashMap: Part of the Java Collections Framework introduced in Java 1.2 and is the preferred choice for new
+          code.
+        - Hashtable: Considered a legacy class, introduced in Java 1.0. It is recommended to use `HashMap` or other
+          modern
+          alternatives instead.
+
+    5. **Iterator**:
+        - HashMap: Uses fail-fast iterators, which throw a `ConcurrentModificationException` if the map is modified
+          while
+          iterating.
+        - Hashtable: Uses enumerations, which are not fail-fast and do not throw exceptions if the map is modified
+          during
+          iteration.
+
+    Example of using a `HashMap`:
+    ```java
+    import java.util.HashMap;
+
+    public class HashMapExample {
+        public static void main(String[] args) {
+            HashMap<String, Integer> ageMap = new HashMap<>();
+            ageMap.put("Alice", 30);
+            ageMap.put("Bob", 25);
+            System.out.println("Age of Bob: " + ageMap.get("Bob"));
+        }
+    }
+    ```
+
+    In summary, use `HashMap` for non-thread-safe scenarios with better performance and flexibility, while `Hashtable`
+    is
+    suitable for legacy code requiring thread safety but with performance trade-offs.
+
+---
+
+95. **What are the advantages of using Collections Framework in java?**  
+    The Java Collections Framework provides several advantages that make it a powerful and flexible tool for managing
+    groups
+    of objects. Some of the key advantages include:
+
+    1. **Standardized API**: The Collections Framework provides a consistent and standardized set of interfaces and
+       classes
+       for
+       working with different types of collections, making it easier for developers to learn and use.
+
+    2. **Rich Set of Data Structures**: The framework includes a variety of data structures such as lists, sets, maps,
+       and
+       queues, allowing developers to choose the most appropriate structure for their specific use cases.
+
+    3. **Dynamic Sizing**: Collections can grow and shrink dynamically as elements are added or removed, providing
+       flexibility
+       in managing data without the need to specify a fixed size.
+
+    4. **Built-in Algorithms**: The Collections Framework includes built-in algorithms for sorting, searching, and
+       manipulating collections, reducing the need for custom implementations and improving code efficiency.
+
+    5. **Generics Support**: With the introduction of generics in Java, the Collections Framework allows for type-safe
+       collections,
+       reducing runtime errors and improving code readability.
+
+    6. **Performance Optimization**: Many collection classes are optimized for performance, providing efficient access,
+       insertion,
+       and deletion operations.
+
+    7. **Thread Safety Options**: The framework provides options for creating thread-safe collections, such as
+       `Collections.synchronizedList()`
+       and `ConcurrentHashMap`, making it easier to work with collections in multi-threaded environments.
+
+    8. **Interoperability**: The Collections Framework is designed to work seamlessly with other Java APIs, such as
+       streams
+       and
+       lambda expressions, enabling more expressive and functional programming styles.
+
+    Overall, the Java Collections Framework simplifies the process of managing groups of objects, enhances code quality,
+    and
+    improves developer productivity.
+
+---
+
+96. **What is the difference between Enumeration and Iterator in java?**  
+    The main differences between `Enumeration` and `Iterator` in Java are as follows:
+
+    1. **Interface**:
+        - Enumeration: An older interface that is part of the original Java 1.0 version.
+        - Iterator: A newer interface introduced in Java 1.2 as part of the Java Collections Framework.
+
+    2. **Methods**:
+        - Enumeration: Provides two main methods: `hasMoreElements()` to check if there are more elements and
+          `nextElement()`
+          to retrieve the next element.
+        - Iterator: Provides three main methods: `hasNext()` to check if there are more elements, `next()` to retrieve
+          the
+          next element, and `remove()` to remove the last element returned by the iterator.
+
+    3. **Modification**:
+        - Enumeration: Does not support element removal during iteration. It is read-only.
+        - Iterator: Supports element removal during iteration using the `remove()` method.
+
+    4. **Legacy vs Modern**:
+        - Enumeration: Considered a legacy interface and is generally not recommended for use in new code.
+        - Iterator: Part of the modern Java Collections Framework and is the preferred choice for iterating over
+          collections.
+
+    5. **Type Safety**:
+        - Enumeration: Does not support generics, which can lead to type safety issues.
+        - Iterator: Supports generics, allowing for type-safe iteration over collections.
+
+    Example of using an `Iterator`:
+    ```java
+    import java.util.ArrayList;
+    import java.util.Iterator;
+
+    public class IteratorExample {
+        public static void main(String[] args) {
+            ArrayList<String> names = new ArrayList<>();
+            names.add("Alice");
+            names.add("Bob");
+            names.add("Charlie");
+
+            Iterator<String> iterator = names.iterator();
+            while (iterator.hasNext()) {
+                String name = iterator.next();
+                System.out.println(name);
+            }
+        }
+    }
+    ```
+
+    In summary, use `Iterator` for modern, type-safe iteration with support for element removal, while `Enumeration` is
+    considered legacy and lacks these features.
+
+---
+
+97. **What is Process and Thread in java? What are the differences between them?**  
+    In Java, a **Process** and a **Thread** are two fundamental concepts related to program execution, but they differ
+    significantly in their scope and functionality.
+
+    1. **Process**:
+        - A process is an independent program that is executed by the operating system. It has its own memory space,
+          system
+          resources, and execution context.
+        - Each process runs in isolation from other processes, meaning that one process cannot directly access the
+          memory
+          or
+          resources of another process.
+        - Processes are typically heavier in terms of resource consumption, as they require separate memory allocation
+          and
+          management by the operating system.
+        - Example: When you run a Java application, the Java Virtual Machine (JVM) creates a new process for that
+          application.
+
+    2. **Thread**:
+        - A thread is a smaller unit of execution within a process. Multiple threads can exist within a single process,
+          sharing
+          the same memory space and resources.
+        - Threads within the same process can communicate with each other more easily since they share the same memory.
+        - Threads are lighter in terms of resource consumption compared to processes, as they do not require separate
+          memory allocation.
+        - Example: In a Java application, you can create multiple threads to perform concurrent tasks, such as handling
+          user input while processing data in the background.
+
+    Key Differences:
+    - Isolation: Processes are isolated from each other, while threads within the same process share memory and
+      resources.
+    - Resource Consumption: Processes are heavier and consume more resources than threads.
+    - Communication: Inter-process communication is more complex than inter-thread communication due to isolation.
+    - Creation Time: Creating a new process takes more time compared to creating a new thread.
+
+    In summary, processes are independent programs with their own resources, while threads are lightweight units of
+    execution within a process that share resources.
+
+---
