@@ -3857,3 +3857,133 @@
     execution within a process that share resources.
 
 ---
+
+98. **Explain Multithreading in java. What are the advantages of using multithreading?**  
+    Multithreading in Java is a programming concept that allows multiple threads to run concurrently within a single
+    program. Each thread represents a separate path of execution, enabling tasks to be performed simultaneously. Java
+    provides built-in support for multithreading through the `Thread` class and the `Runnable` interface.
+
+    Advantages of using multithreading in Java include:
+
+    1. **Improved Performance**: Multithreading can enhance the performance of applications by allowing multiple tasks
+       to run concurrently, especially on multi-core processors. This can lead to faster execution and better resource
+       utilization.
+
+    2. **Responsiveness**: Multithreading allows applications to remain responsive while performing time-consuming
+       tasks. For example, a user interface can continue to respond to user input while background tasks are being
+       executed.
+
+    3. **Resource Sharing**: Threads within the same process share memory and resources, which can lead to more
+       efficient communication and data sharing between threads.
+
+    4. **Better User Experience**: Multithreading can improve the user experience by allowing for smoother interactions,
+       such as animations or real-time updates, without freezing the application.
+
+    5. **Simplified Program Structure**: Multithreading can simplify the structure of programs that require concurrent
+       execution of tasks, making it easier to manage complex workflows.
+
+    In summary, multithreading in Java allows for concurrent execution of tasks, leading to improved performance,
+    responsiveness, and a better user experience while simplifying program structure.
+
+---
+
+99. **What is Main Thread and Deamon Thread in java? What are the differences between them?**  
+    In Java, the **Main Thread** and **Daemon Thread** are two types of threads that serve different purposes in a Java
+    application.
+
+    1. **Main Thread**:
+        - The main thread is the primary thread of execution in a Java application. It is created by the Java Virtual
+          Machine (JVM) when the program starts.
+        - The main thread is responsible for executing the `main()` method, which is the entry point of the application.
+        - The main thread continues to run until the `main()` method completes its execution or until it is explicitly
+          terminated.
+
+    2. **Daemon Thread**:
+        - A daemon thread is a background thread that runs in the background and provides services to other threads. It
+          is typically used for tasks such as garbage collection, monitoring, or other background processes.
+        - Daemon threads do not prevent the JVM from exiting when all user threads (including the main thread) have
+          finished executing. When there are no more user threads running, the JVM will terminate all daemon threads
+          automatically.
+        - You can create a daemon thread by calling the `setDaemon(true)` method on a `Thread` object before starting
+          it.
+
+    Key Differences:
+    - Purpose: The main thread is responsible for executing the main logic of the application, while daemon threads are
+      used for background tasks.
+    - Lifecycle: The main thread runs until it completes its execution, while daemon threads run in the background and
+      are terminated automatically when all user threads have finished.
+    - JVM Behavior: The JVM will exit when all user threads (including the main thread) have finished, regardless of
+      whether daemon threads are still running.
+
+    In summary, the main thread is the primary thread of execution in a Java application, while daemon threads are
+    background threads that provide services and do not prevent the JVM from exiting when all user threads have
+    finished.
+
+---
+
+100. **In how many ways we can implement multithreading in java? Explain each of them.**
+
+- **Extending the Thread Class**:
+    - In this approach, you create a new class that extends the `Thread` class and override the `run()` method to
+      define the code that will be executed by the thread.
+    - To start the thread, you create an instance of your class and call the `start()` method, which internally
+      calls the`run()` method in a new thread of execution.
+
+      Example:
+       ```java
+       class MyThread extends Thread {
+           public void run() {
+               System.out.println("Thread is running");
+           }
+       }
+ 
+       public class Main {
+           public static void main(String[] args) {
+               MyThread thread = new MyThread();
+               thread.start();
+           }
+       }
+       ```
+
+- **Implementing the Runnable Interface**:
+    - In this approach, you create a class that implements the `Runnable` interface and override the `run()` method
+      to define the code that will be executed by the thread.
+    - To start the thread, you create an instance of your class, pass it to a `Thread` object, and then call the
+      `start()` method on the `Thread` object.
+      Example:
+       ```java
+       class MyRunnable implements Runnable {
+           public void run() {
+               System.out.println("Thread is running");
+           }
+      }
+
+      public class Main {
+          public static void main(String[] args) {
+              MyRunnable myRunnable = new MyRunnable();
+              Thread thread = new Thread(myRunnable);
+              thread.start();
+          }
+      }
+      ```
+- **Using Lambda Expressions**:
+    - With the introduction of lambda expressions in Java 8, you can create threads more concisely by passing a lambda
+      expression that implements the `Runnable` interface directly to the `Thread` constructor.
+    - This approach is more compact and can improve readability when the thread's task is simple.
+      Example:
+       ```java
+       public class Main {
+           public static void main(String[] args) {
+               Thread thread = new Thread(() -> {
+                   System.out.println("Thread is running");
+               });
+               thread.start();
+           }
+       }
+       ```
+
+In summary, you can implement multithreading in Java by extending the `Thread` class, implementing the `Runnable`
+interface, or using lambda expressions for a more concise syntax. Each approach allows you to define the behavior of the
+thread and start it to execute concurrently with other threads.
+
+---
