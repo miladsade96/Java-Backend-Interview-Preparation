@@ -3987,3 +3987,116 @@ interface, or using lambda expressions for a more concise syntax. Each approach 
 thread and start it to execute concurrently with other threads.
 
 ---
+
+101. **What is the difference between Thread class and Runnable interface in java?**
+
+- **Inheritance vs Implementation**:
+    - Thread Class: To create a thread by extending the `Thread` class, you need to create a new class that extends
+      `Thread` and override the `run()` method. This approach uses inheritance.
+    - Runnable Interface: To create a thread by implementing the `Runnable` interface, you need to create a new
+      class that implements `Runnable` and override the `run()` method. This approach uses composition.
+
+- **Multiple Inheritance**:
+    - Thread Class: Since Java does not support multiple inheritance, if you extend the `Thread` class, you cannot
+      extend any other class.
+    - Runnable Interface: By implementing the `Runnable` interface, you can still extend another class, allowing for
+      more flexibility in your class design.
+
+- **Resource Sharing**:
+    - Thread Class: When you extend the `Thread` class, each thread has its own instance of the class, which can
+      lead to issues with resource sharing if not handled properly.
+    - Runnable Interface: When you implement the `Runnable` interface, multiple threads can share the same instance
+      of the class, making it easier to manage shared resources.
+
+- **Code Reusability**:
+    - Thread Class: Extending the `Thread` class can lead to less reusable code, as you are tied to the thread
+      implementation.
+    - Runnable Interface: Implementing the `Runnable` interface promotes better code reusability, as you can
+      separate the thread's task from the thread's execution.
+
+In summary, the main difference between the `Thread` class and the `Runnable` interface in Java is that the `Thread`
+class uses inheritance to create threads, while the `Runnable` interface uses composition, allowing for more flexibility
+and better resource management. The `Runnable` interface is generally preferred for creating threads in Java due to its
+advantages in code reusability and resource sharing.
+
+---
+
+102. **What are some important methods of Thread class in java? Explain each of them.**
+
+- `start()`: This method is used to start the execution of a thread. When you call `start()`, the JVM creates a new
+  thread and calls the `run()` method of the thread in that new thread of execution.
+
+- `run()`: This method contains the code that defines the behavior of the thread. It is called when the thread is
+  started. You can override this method to specify what the thread should do when it runs.
+
+- `sleep(long millis)`: This static method causes the currently executing thread to sleep (pause execution) for a
+  specified number of milliseconds. It can throw an `InterruptedException` if another thread interrupts the sleeping
+  thread.
+
+- `join()`: This method allows one thread to wait for another thread to complete its execution. When you call
+  `join()` on a thread, the calling thread will block until the specified thread has finished executing.
+
+- `interrupt()`: This method is used to interrupt a thread that is currently sleeping, waiting, or otherwise
+  occupied. It sets the interrupt status of the thread, which can be checked using `isInterrupted()` or handled in
+  a catch block for `InterruptedException`.
+
+- `isAlive()`: This method returns `true` if the thread is still running (i.e., it has been started and has not yet
+  completed), and `false` otherwise.
+
+- `setPriority(int newPriority)`: This method sets the priority of a thread. The priority can be an integer value
+  between 1 (lowest) and 10 (highest). Higher priority threads are more likely to be scheduled for execution before
+  lower priority threads.
+
+- `getName()`: This method returns the name of the thread. You can also set a custom name for a thread using
+  `setName(String name)`.
+
+- `currentThread()`: This static method returns a reference to the currently executing thread. It can be used to get
+  information about the current thread or to perform operations on it.
+
+---
+
+103. **What is the role of Generics in java? What are the advantages of using Generics?**  
+     Generics in Java is a powerful feature that allows developers to create classes, interfaces, and methods that can
+     operate on objects of various types while providing compile-time type safety. The main role of Generics is to
+     enable code reusability and to ensure that type-related errors are caught at compile time rather than at runtime.
+
+---
+
+104. **What is a Generic method in java? How to implement it?**  
+     A generic method in Java is a method that can operate on objects of various types while providing compile-time type
+     safety. It is defined with a type parameter, which allows the method to be flexible and reusable for different data
+     types.
+
+     To implement a generic method, you need to declare the type parameter in angle brackets (`<>`) before the return
+     type of the method. The type parameter can then be used within the method to refer to the type of objects it will
+     operate on.
+
+     Here’s an example of a generic method that takes an array of any type and prints its elements:
+
+     ```java
+     public class GenericMethodExample {
+         // Generic method to print elements of an array
+         public static <T> void printArray(T[] array) {
+             for (T element : array) {
+                 System.out.println(element);
+             }
+         }
+
+         public static void main(String[] args) {
+             Integer[] intArray = {1, 2, 3, 4, 5};
+             String[] stringArray = {"Hello", "World", "Generics"};
+
+             System.out.println("Integer Array:");
+             printArray(intArray);
+
+             System.out.println("\nString Array:");
+             printArray(stringArray);
+         }
+     }
+     ```
+
+     In this example, the `printArray` method is a generic method that can accept an array of any type (e.g., `Integer`,
+     `String`, etc.). The type parameter `T` is used to represent the type of elements in the array, allowing for
+     flexibility and code reusability.
+
+---
